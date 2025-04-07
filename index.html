@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Background</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('mobile.png');
+            position: relative;
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            body {
+                background-image: url('tablet.png');
+            }
+        }
+
+        @media (min-width: 1025px) {
+            body {
+                background-image: url('desktop.png');
+            }
+        }
+
+        .logo {
+            margin-top: 1rem;
+            max-width: 50%;
+            max-height: 40vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        @media (min-width: 550px) {
+            .logo {
+                max-width: 40%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .logo {
+                max-width: 35%;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .logo {
+                max-width: 25%;
+            }
+        }
+
+        @media (min-width: 1260px) {
+            .logo {
+                max-width: 20%;
+                max-height: 50vh;
+            }
+        }
+
+        .button-container {
+            position: absolute;
+            top: 57%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 600px) {
+            .button-container {
+                top: 58%;
+                gap: 2rem;
+            }
+        }
+
+        @media (min-width: 750px) {
+            .button-container {
+                top: 70%;
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .button-container {
+                top: auto;
+                bottom: 2rem;
+                transform: translateX(-50%);
+            }
+        }
+
+        .button-container button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+        }
+
+
+        .button-container img {
+            display: block;
+            max-width: 170px;
+            height: auto;
+            transition: transform 0.2s ease;
+        }
+
+        @media (min-width: 500px) {
+            .button-container img {
+                max-width: 240px;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .button-container img {
+                max-width: 240px;
+            }
+        }
+
+      
+
+        /* Click (spring) effect */
+        @keyframes spring {
+            0% {
+                transform: scale(1);
+            }
+
+            40% {
+                transform: scale(0.8);
+            }
+
+            60% {
+                transform: scale(1.08);
+            }
+
+            80% {
+                transform: scale(0.8);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Trigger spring animation on click */
+        .button-container img.clicked {
+            animation: spring 300ms ease;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="logo.png" alt="Logo" class="logo" />
+
+    <div class="button-container">
+        <button>
+            <img src="web.png" alt="Web Button" class="web" />
+        </button>
+        <button>
+            <img src="android.png" alt="Android APK" class="android" />
+        </button>
+    </div>
+
+    <script>
+        document.querySelectorAll('.button-container button').forEach(button => {
+            const img = button.querySelector('img');
+
+            button.addEventListener('click', () => {
+                img.classList.remove('clicked');
+                void img.offsetWidth; // Force reflow to restart animation
+                img.classList.add('clicked');
+
+                // const href = img.alt.includes('Web')
+                //     ? 'https://example.com/web'
+                //     : 'https://example.com/android.apk';
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 300); // delay for animation
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
